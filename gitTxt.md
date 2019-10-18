@@ -69,9 +69,9 @@
             commit d5341a5d3bd79b3780feb932ebbd3e1cd0032bdb    版本id
             Author: wangshuai <wangsbruce@163.com>             提交作者
             Date:   Fri Oct 18 14:10:26 2019 +0800             时间
-
+    
         `
-
+    
     + $ git reflog 
         `txt
             daae0a3 HEAD@{2}: commit (initial): 第一个版本添加h1
@@ -171,15 +171,16 @@
 
     + $ ssh-keygen -t rsa -C “你的邮箱地址”
     + $ cat ~/.ssh/id_rsa.pub
-
+    
     `txt
         配置密钥流程：
             1：在终端 ssh-keygen -t rsa -C “你的邮箱地址” 
             2：在终端 cat ~/.ssh/id_rsa.pub
             3：得到 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDFI/4Xh6vEnBKoadpohBvCP8PQdi0zGRupOfn8IrWqz+G9ZAGFJdAEDItXhQs6HIfk3ps34xnPuiSRAE8y/oCtNiUgcQ0Q8l2TGhFBZ2q1rrv15+HmBhf07obsDGNU01WxbVwf81Vv8R6Q9LI7D31j8ifFHJJOKtBEJoMMDuehHnXltzQ5/onRpE+QRBW3UuX9Fhvw/aLoX9gD5M3AuwRzSqe/gALViKtzr+Pj2tRjbwUQwmHR62Obz9kFTHQ414GmtUYpRSRg6VwAJ5dl+heijW1j6bR1gWpnyKW5Hs6PM9PAIx9UiYHfpAl+kPYguWxZHigSd7OoMzAhBU64dyb9ZFSIZqfhodQgiEIZVj3CKTYAgdLSWchTVLq6U3te+rhAnrWD2MBT7IFPZ+jQZoH1kNhx3y8OvEq6TudrP6ICkvDN6dYD4r007gaXmRT5WFqWaKGhf2XI8fJg/cAnWMImURcfUI/KgIl1LXCMUP/lT1/HbTjkTa7E0n7tIqlXJAM= wangsbruce@163.com
-
+    
             4：把拿到的密钥配置到github
     `
 
 
 
+# 33333333333333333333333333333333333333333333333
