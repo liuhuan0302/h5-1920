@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul id="mian"></ul>
+    <button id="button">点击替换</button>
+    <script>
+        //虚拟dom 依赖js语言
+        //diff算术
+        //虚拟dom存储结构
+        {
+            tag:"ul",
+            attrs:{id:"main",class:"aaa"},
+            children:{
+                tag:"li",
+                attrs:{},
+                children:{
+                    tag:"span",
+                    attrs:{},
+                    children:["哈哈"]
+                }
+            }
+        }
+        var data = [
+            {
+                title:"哈哈",
+                num:1
+            },
+            {
+                title:"嘿嘿",
+                num:2
+            },
+            {
+                title:"呵呵",
+                num : 5
+            }
+        ]
+
+        function render(data){
+            //元素节点的插入
+            var html = ""
+            data.forEach(item=>{
+                html +=`<li><span>${item.title}</span><span>${item.num}</span></li>`
+            })
+            mian.innerHTML = html;
+        }
+        render(data)
+        //点击替换(替换其中的内容)(会重新渲染所有的节点)
+        button.onclick = function(){
+            data[0].num = 3;
+            data[1].title = "嘻嘻"
+            render(data)
+        }
+    </script>
+</body>
+</html>

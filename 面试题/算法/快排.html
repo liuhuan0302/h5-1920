@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var arr = [10, 20, 77, 30, 50, 88, 190, 40];
+    function quickSort(){
+        if(arr.length <=1){
+            return arr
+        }
+        var middleIndex = parseInt(arr.length/2),
+            middleValue = arr[middleIndex],
+            rightArr = [],
+            leftArr = [];
+        for(let i = 0; i < arr.length; i++){
+            if(middleIndex == i ){
+                continue
+            }
+            if(arr[i] <= middleValue){
+                leftArr.push(arr[i])
+            }else{
+                rightArr.push(arr[i])
+            }
+        }
+        var res = quickSort(leftArr).concat(middleValue).concat(quickSort(rightArr));
+        return res 
+
+    }
+
+    function quickSort(){
+        if(arr.length <= 1){
+            return arr
+        }
+        var midIndex = parseInt(arr.length / 2),
+            midValue = arr[midIndex],
+            leftArr = [],
+            rightArr =[];
+        for(let i = 0 ; i < arr.length; i++){
+            if(midIndex == i){
+                continue
+            }
+            if(arr[i] < midValue){
+                leftArr.push(arr[i])
+            }else{
+                rightArr.push(arr[i])
+            }
+        }
+        var res = quickSort(leftArr).concat(midValue).concat(rightArr)
+        return res
+    }
+        
+    </script>
+</body>
+</html>

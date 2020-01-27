@@ -1,0 +1,6 @@
+ /* pages/classify/classify.wxss */
+ view > view{
+   height:200px;
+   width:300px;
+ }
+ 

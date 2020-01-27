@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title> 
+</head>
+<body>
+    <script>
+    var obj ={
+        a:1
+    }
+    //apply的实现原理
+    Function.prototype.myApply = function(ctx){
+        var ctx = ctx || window;
+        ctx.fn = this
+        //arguments 不确定参数
+        console.log(arguments)
+        //判断是否传入了值
+        if(arguments[1]){
+             //判断传入的是否是一个数组
+             if(Array.isArray(arguments[1])){
+                res = ctx.fn(arguments[1])
+             }else{
+                throw new TypeError("must be Array")
+             }
+        }else{
+            res = ctx.fn()
+        }
+       
+        delete ctx.fn
+        return res
+    }    
+    function b(){
+        console.log(this.a,arguments)
+    }
+    //b.apply(obj,[2,2,3])
+    b.myApply(obj,[1])
+    //console.dir(b)//获取函数的所有的东西
+    </script>
+</body>
+</html>

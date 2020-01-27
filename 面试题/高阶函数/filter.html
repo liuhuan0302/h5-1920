@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //高阶函数JavaScript的函数其实都指向某个变量。既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数。
+    var arr = [1,2,3,4,5,6,7]
+
+    //filter的实现原理
+    Array.prototype.myFilter = function(fn){
+        //判断传入的是不是一个方法
+        if(typeof fn !=="function") return 
+        var arr = this,//谁调用this指向谁
+        //考虑兼容问题,只能用for进行循环遍历
+           arrPush = [];
+        console.log(arr)
+        for(var i = 0; i < arr.length;i++){
+            //做值存储
+            var val = arr[i];
+               
+            //做判断,是否符合条件(fn指的是filter李里面的回调函数)(如果有符合条件的则把他push到数组里面)
+            if(fn.call(null,val,i,arr)){
+                //将符合条件的值,push到新数组
+                arrPush.push(val)
+            }
+        }
+        return arrPush;
+    }
+    var newArr = arr.myFilter((item,index,arrs)=>{
+        return item > 5
+    })    
+    console.log(newArr)
+    </script>
+</body>
+</html>

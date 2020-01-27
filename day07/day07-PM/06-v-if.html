@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="onOff">我是真</div>
+        <div v-else-if="bool">我是bool</div>
+        <div v-else>我是假</div>
+        <div v-show="onOff">我是show</div>
+        <div v-show="!onOff">我是show2</div>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el : "#app",
+        data:{
+            onOff:false,
+            bool:true,
+        },
+        
+    })
+    /*
+    用来判断的指令:不频繁的操作.如果判断逻辑为假,元素销毁,否则元素插入
+        v-if:如果
+        v-else-if:又如果
+        v-else:否则
+    
+    v-show:控制元素显示(display);使用场景:大量频繁操作元素的显示隐藏时
+    
+    */
+    </script>
+</body>
+</html>

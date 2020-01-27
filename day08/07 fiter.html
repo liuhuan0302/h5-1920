@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        margin:100px auto;
+    }
+    td{
+        height:30px;
+        width:120px;
+        text-align: center;
+        cursor: pointer;
+    }
+    button{margin:0 5px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+       
+        <table v-if="message.length">
+            <thead>
+                <tr>
+                    <th>商品</th>
+                    <th>价格</th>
+                    <th>数量</th>
+                    <th>产地</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in message">
+                    <td>{{item.name | fruit}}</td>
+                    <td>{{item.price | setMoney}}</td>
+                    <td><button @click="minues(index)">-</button>{{item.num}}<button @click="add(index)">+</button></td>
+                    <td>{{item.city}}</td>
+                    <td><button @click="remove(index)">删除</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>总价格:{{countPrice | setMoney}}</td>
+                </tr>
+            </tfoot>
+        </table>
+        <div v-else>暂时没有商品哟</div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el : "#app",
+            data:{
+                message:[
+                    {
+                        name:"苹果",
+                        price:28,
+                        num:1,
+                        city:"烟台"
+                    },
+                    {
+                        name:"香蕉",
+                        price:30,
+                        num:1,
+                        city:"泰国"
+                    },
+                    {
+                        name:"哈密瓜",
+                        price:38,
+                        num:1,
+                        city:"新疆"
+                    },
+                    {
+                        name:"樱桃",
+                        price:48,
+                        num:1,
+                        city:"辽宁"
+                    },
+                    {
+                        name:"草莓",
+                        price:28,
+                        num:1,
+                        city:"丹东"
+                    }
+                ]
+            },
+            methods:{
+                minues(i){
+                    this.message[i].num > 1 && this.message[i].num--
+                },
+                add(i){
+                    this.message[i].num <10 && this.message[i].num++
+                },
+                remove(i){
+                    //移除数组中的数据(通过数据控制视图)
+                    this.message.splice(i,1);
+                }
+            },
+            computed:{
+                countPrice(){
+                    return this.message.reduce((prev,cur)=>{
+                        return prev + cur.price * cur.num;
+                    },0)
+                }
+            },
+            filters:{//筛选
+                setMoney(price){
+                    return '￥' + price * 2 + ".00";
+                },
+                fruit(fruit){
+                    return "水果: " + fruit;
+                }   
+            }
+
+        })
+    // | 管道 setMoney方法
+    </script>
+</body>
+</html>

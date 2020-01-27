@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width:100px;
+            height:100px;
+            background:red;
+        }
+        .wrap2{
+            width:200px;
+            height:200px;
+            background:green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+       
+        <!-- <div v-bind:class="{wrap:onOff,wrap2:!onOff}"></div>
+       <button v-on:click="onOff = !onOff">点我切换</button> -->
+       <div v-bind:class="{wrap:onOff,wrap2:!onOff}"></div>
+       <button v-on:click="Tab">点我切换</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    
+    new Vue({
+        el : "#app",
+        data :{
+            message : '哈哈哈哈',
+            onOff : true, 
+        },
+        methods:{//方法
+            Tab : function(){
+                alert(this.onOff);
+                this.onOff = !this.onOff;
+            }
+        }
+    })
+/*
+    v-on :绑定事件
+        v-on:click 绑定点击事件
+        v-on: keyup
+
+*/
+   
+    </script>
+</body>
+</html>

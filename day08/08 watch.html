@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{obj.b.c}}
+        <br>
+        <input type="text" v-model="obj.b.c">
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            dog:"哈士奇",
+            obj:{
+                a : 1,
+                b :{
+                    c:100,
+                }
+            }
+        },
+        computed:{
+            a(){
+                return this.obj.a + this.obj.b.c
+            }
+        },
+        watch:{//监听属性的变化(一开始不做监听,只有数据发生改变时,开始监听)
+            // dog(newValue,oldValue){
+            //     if(newValue == "博美")
+            //     this.dog = oldValue;
+            //     console.log(newValue,oldValue); 
+            // }
+            // "obj.a"(newValue,oldValue){
+            //     console.log(newValue,oldValue)
+
+            // }
+            obj:{
+                handler(nVal,oVal){
+                    console.log(nVal,oVal)
+                },
+                //深层监控
+                deep:true,
+                //页面渲染完成,就开始监听
+                immediate:true,
+            }
+            
+        }
+    })
+    // watch 不能监听computed 属性  
+    </script>
+</body>
+</html>

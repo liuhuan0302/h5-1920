@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="fn1(1,2,$event)">点我</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el : "#app",
+        data :{},
+        methods:{
+            fn1(a,b,e){
+               console.log(a,b,e);
+            }
+        }
+    })
+    /*
+    当不写括号的时候,默认情况下获取的是事件对象
+    获取事件对象:(1,2,$event)
+    $event当实参传递 在形参内就可以获取到事件对象 并且实参无参数那么形参的第一个参数就表示是事件对象
+    
+    */
+    </script>
+</body>
+</html>

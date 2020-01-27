@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function dimReduction(arr) {
+            let newArr = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (Array.isArray(arr[i])) {
+                    newArr = newArr.concat(dimReduction(arr[i]));
+                } else {
+                    newArr.push(arr[i]);
+                }
+            }
+            return newArr;
+        }
+        // function dimReduction(arr){
+        //     let newArr = [];
+        //     for(let i = 0; i < arr.length;i++){
+        //         if(Array.isArray[i]){
+        //             newArr = newArr.concat(dimReduction(arr[i]));
+        //         }else{
+        //             newArr.push(arr[i])
+        //         }
+        //     }
+        // }    
+
+        // function dimReduction(arr){
+        //     var newArr = [];
+        //     for(let i = 0; i < arr.length; i++){
+        //         if(Array.isArray(arr[i])){
+        //             newArr = newArr.concat(dimReduction(arr[i]))
+        //         }else{
+        //             newArr.push(arr[i])
+        //         }
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

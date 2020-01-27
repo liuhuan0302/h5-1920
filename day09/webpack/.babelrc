@@ -1,0 +1,5 @@
+{
+    "presets": [["@babel/preset-env",{
+        "useBuiltIns": "usage"//用什么转什么
+    }]]
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--  contenteditable 富文本编辑器的属性 -->
+    <div style="border: 1px solid red;" contenteditable id="content">
+        <img src="http://b.hiphotos.baidu.com/image/h%3D300/sign=ad628627aacc7cd9e52d32d909032104/32fa828ba61ea8d3fcd2e9ce9e0a304e241f5803.jpg" alt="">
+    </div>
+    <button onClick="insertImg()">插入图片</button>
+    <button onClick="bind()">点我加粗</button>
+    <button onClick="italic()">点我倾斜</button>
+    <script>
+    //点击插入图片
+    function insertImg(){
+        //新建元素标签img
+        const img = new Image()
+        img.src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1300578584,1845801982&fm=26&gp=0.jpg"
+        content.appendChild( img )
+    }
+    //加粗文字
+    function bind(){
+        //execCommand 专门对富文本编辑器做控制
+        document.execCommand("bold")
+    }
+    //倾斜文字
+    function italic(){
+        document.execCommand("italic")
+    }
+    </script>
+</body>
+</html>

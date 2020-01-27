@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // function Fn(){
+    //     this.a = 1;
+    //     this.b = 2;
+    // }    
+    // //new Fn的优先级要比 Fn()高
+    // //先生成对象,在从对象中找到a的属性
+    // console.log(new Fn().a)
+
+    /*
+    new的过程
+        //1.var obj = new Object()
+        //2.obj._proto_ = Fn.prototype
+
+        //3.var fn = Fn.call(obj)
+        //4.判断 fn 是一个对象还是基本类型
+        //如果是一个对象 返回 fn  如果是一个基本类型 obj
+    
+    
+    */ 
+
+
+    // function newFn(fn){
+    //     //1.创建一个空对象,创建的对象没有proto(其实是有的)(类似与原型链的顶端)
+    //     var obj = Object.create({})
+    //     //console.log(obj)
+    //     //2.关联原型
+    //     obj.__proto__ = fn.prototype;
+    //     //改变this指向(将obj 指向fn)
+    //     var res = fn.call(obj)
+    //     //判断res 是不是一个对象,如果是一个对象,返回原来的函数,否则返回一个对象
+    //     return typeof res == "Object" ?  fn : obj
+       
+    // }
+
+    // function Test(){
+    //     this.a = 1
+    // }
+    // // const test = new Test()
+    // const test = newFn(Test)
+    // console.log(test instanceof Test)//true
+    // newFn()
+
+    // for(var i = 0;i < 5; i++){
+          
+    // }
+    // console.log(i)
+
+    function a(x){
+        return x 
+    }
+    var a;
+    console.log(a);
+    </script>
+</body>
+</html>

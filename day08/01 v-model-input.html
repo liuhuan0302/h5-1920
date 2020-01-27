@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <input type="text" v-model="message"> -->
+        <!-- <input type="text" :value="message" @input="model"> -->
+        <!-- <input type="text" v-model.lazy="message">
+        <input type="text" v-model.number="num"> -->
+        <!-- <p>{{typeof num}}</p>
+        <p>{{message}}</p> -->
+        <input type="text" v-model="num1"></input>
+        <input type="text" v-model="num2"></input>
+        <p>{{value}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el : "#app",
+        data :{
+            value:num1+num2
+            // message : "大家早上好",
+            // num : ""
+        },
+        methods:{
+            model(e){
+                this.message = e.target.value;
+            }
+        }
+    })
+    /*
+    v-model : 双数据绑定
+    v-bind: 让原生属性支持vue语法
+    input事件:每次输入就会触发事件
+    v-model的语法糖:  :value="message" @input="model"
+
+    v-model修饰符:
+    .lazy 失去焦点时才开始渲染
+    number 转变数据类型
+    
+    */
+    </script>
+</body>
+</html>

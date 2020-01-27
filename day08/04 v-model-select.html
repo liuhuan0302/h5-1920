@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <select name="" id="" v-model="sport" multiple>
+            <option value="打篮球" selected >打篮球</option>
+            <option value="打羽毛球">打羽毛球</option>
+            <option value="踢足球">踢足球</option>
+            <option value="打乒乓球">打乒乓球</option>
+            <option value="打排球">打排球</option>
+        </select>
+        <p>{{sport}}</p>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            sport:"打篮球"
+        }
+    })
+    </script>
+</body>
+</html>

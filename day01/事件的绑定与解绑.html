@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+        事件的绑定与解绑
+    */ 
+   function f1(a){
+       console.log(a+'01');
+   }
+   function f2(a){
+       console.log(a+'02');
+   }
+   function f3(a){
+       console.log(a+'03');
+   }
+
+   function fn1(a){
+       console.log(a);
+   }
+   function fn2(a){
+       console.log(a+2);
+   }
+   function fn3(a){
+       console.log(a+3);
+   }
+
+   //不操作dom 执行事件
+   var eventObj = {
+       //事件名 : [需要执行的函数]
+   }
+   //事件绑定
+   //eventName 执行的事件,fn 需要执行的函数
+   function on(eventName,fn){
+       //判断事件库里面是否有这个事件
+       if(!eventObj[eventName]){
+           //如果没有这个事件则动态创建事件
+           eventObj[eventName] = [];
+       }
+       //添加执行的方法
+       eventObj[eventName].push(fn);
+   }
+
+   //事件执行
+   //param 参数
+   function emit(eventName,fn,param){
+       //判断是否有这事件
+       if(eventObj[eventName]){
+           eventObj[eventName].map( (items)=>{
+               //items 代表数组里面的每一项函数
+               items(param);
+           })
+       }
+   }
+
+   //事件的解绑
+   function off(eventName,fn){
+       //判断eventObj 里面是否存在 eventObj
+       if(eventObj[eventName]){
+           //如果有第二个参数,移除第二个参数
+           if(fn){
+               let index = eventObj[eventName].indexOf(fn);
+               eventObj[eventName].splice(index,1);
+           }else{
+               //如果不存在第二个参数,响应移除整个事件
+               eventObj[eventName].length = 0;
+           }
+       }
+   }
+
+   //绑定事件
+   on('ws',fn1);
+   on('ws',fn2);
+   on('ws',fn3);
+   console.log(eventObj);
+
+   //事件执行
+   emit('aa','22222');
+   emit('ws','2222');
+   off('ws',fn1);
+   console.log(eventObj);
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function a() { alert('我是函数') }//
+        // var a
+        // alert(a);//输出：function a(){ alert('我是函数') }
+
+        // a = '我是变量';
+        // alert(a);   //输出：'我是变量'
+        // function c(){
+        // console.log(a)
+        //  }
+        //  function b(){
+        //      var a = 5
+        //      c()
+        //  }
+        //  var a
+        //  a = 4 
+
+        //  b()
+
+
+        function Parent(value) {
+            this.val = value
+        }
+        Parent.prototype.getValue = function () {
+            console.log(this.val)
+        }
+        function Child(value) {
+            Parent.call(this, value)
+        }
+        Child.prototype = new Parent()
+
+        const child = new Child(1)
+        const parent = new Parent()
+        console.dir(child)
+        console.log(parent)
+        child.getValue() // 1
+        child instanceof Parent // true
+
+    </script>
+</body>
+
+</html>

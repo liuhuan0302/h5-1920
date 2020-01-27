@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <input type="checkbox" value="苹果" v-model="todos">苹果
+        <input type="checkbox" value="香蕉" v-model="todos">香蕉
+        <input type="checkbox" value="橘子" v-model="todos">橘子
+        <input type="checkbox" value="柚子" v-model="todos">柚子
+        <input type="checkbox" value="梨子" v-model="todos">梨子 -->
+        <input type="checkbox" value="梨子" v-model="todo">梨子
+        <button @click="next">下一步</button>
+        <p>{{todo}}</p>
+        <!-- <p>{{todos}}</p> -->
+    
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el : "#app",
+        data:{
+            todos:[],
+            todo :''
+        },
+        //注;methods 加s
+        methods:{
+            next(){
+                if(this.todo){
+                    alert(1111)
+                }
+               
+            }
+        }
+    })
+    
+    </script>
+</body>
+</html>

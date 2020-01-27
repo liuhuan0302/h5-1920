@@ -1,0 +1,38 @@
+html,body{
+    margin:0;
+    padding:0;
+    height:100%;
+    width:100%;
+    overflow: hidden;
+}
+#wrap{
+    height: 100%;
+    width: 100%;
+    background:blue;
+}
+.login{
+    width:340px;
+    height:340px;
+    background: rgba(255, 255, 255, .7);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding-top:50px;
+    box-sizing: border-box;
+   
+}
+#wrap>.login>div{
+    height:50px;
+    width:300px;
+    margin-bottom:0px;
+    margin: 0 auto 20px;
+    
+}
+input{height:40px;width:200px;}
+span{display:block;width:150px;height:30px;font-size:20px;color:#fff;background:pink;text-align: center;line-height:30px;margin:auto;cursor: pointer;}
+
+.register-tips{display:block;height:30px;width:90px;background:orange;font-size:16px;line-height:30px;text-align:center;margin:60px 0 0 240px;cursor: pointer;}
+

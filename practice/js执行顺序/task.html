@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+       
+    
+    setTimeout(_=>{
+        console.log('aaa');
+    })
+
+    setTimeout(_=>{
+        console.log("bbb");
+        setTimeout(_=>{
+            console.log("ccc")
+        })
+    })
+    setTimeout(_=>{
+        console.log("ddd");
+    })
+
+    // setTimeout(function(){
+    //         console.log(1)
+    //     },0);
+
+    // new Promise(function(resolve){
+    //        console.log(2)
+
+    //     for( var i=100000 ; i>0 ; i-- ){
+    //         i==1 && resolve()
+    //     }
+    //        console.log(3)
+    //     })
+    //     .then(function(){
+    //        console.log(4)
+    //     });
+
+    //        console.log(5);
+
+//     async function funAsy() {
+//     const a = await 1
+//     const b = await new Promise((resolve, reject)=>{
+//         console.log(3333)
+//          setTimeout(function(){
+//             resolve('222')
+//          }, 3000)
+//     })
+//     const c = await b
+//     console.log(a, b, c)
+//  }
+ 
+ //funAsy()
+    //执行顺序是 aaa bbb ddd ccc
+    /*
+    macrotasks 的划分如下：（注意先后顺序！）
+        （1）setTimeout（延迟调用）
+        （2）setInterval（间歇调用）
+        （3）setImmediate（Node 的立即调用）
+        （4）requestAnimationFrame（高频的 RAF）
+        （5）I/O（I/O 操作）
+        （6）UI rendering（UI 渲染）
+
+    注意：
+        （1）每一个 macrotask 的回调函数要放在下一车的开头去执行！
+        （2）只有 setImmediate 能够确保在下一轮事件循环立即得到处理
+
+    一个事件循环（eventLoop）的执行顺序（非常重要）：
+        ① 开始执行脚本。
+        ② 取 macrotasks（taskQueue）(宏任务)中的第一个 task 执行，该 task 的回调函数 放在下一个 task 开头 执行。
+        ③ 取 microtasks(微任务) 中的全部 microtask 依次执行，当这些 microtask 执行结束后，可继续添加 microtask 继续执行，直到 microtask 队列为空。
+        ④ 取 macrotasks（taskQueue）中的第二个 task 执行，该 task 的回调函数 放在下一个 task 开头 执行。
+        ⑤ 再取 microtasks 中的全部 microtask 依次执行，当这些 microtask 执行结束后，可继续添加 microtask 继续执行，直到 microtask 队列为空。
+        ⑥ 循环 ② ③ 直到 macrotasks、microtasks 为空。
+
+
+    
+    */
+    </script>
+</body>
+</html>

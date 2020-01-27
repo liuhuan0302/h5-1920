@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-on:click ="fn1">
+            <button v-on:click.stop ="fn2">点我冒泡</button>
+        </div>
+        <form action="/index.html" method="post">
+            <input v-on:click.prevent="submit" type="submit" value="提交">
+        </form>
+    </div>
+
+
+    
+    <script src="vue.js"></script>
+    <script>
+    new Vue({
+        el : "#app",
+        data:{},
+        methods:{
+            fn1 :()=>{
+                alert("我是div");
+            },
+            fn2 :()=>{
+                alert(1111);
+            },
+            submit() {
+                alert(111);
+            }
+        }
+    })
+    /*
+    事件的修饰符:
+        prevent:阻止浏览器默认行为
+        stop : 阻止冒泡
+    v-click:语法糖:@click
+    
+    */
+    </script>
+</body>
+</html>

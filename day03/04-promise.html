@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function delay(data) {
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             resolve(data);
+        //         }, 2000)
+        //     })
+        // }
+
+        // console.log(delay())
+
+        // async function fn() {
+        //     console.log("a");
+        //     return 10
+        // }
+        // fn().then(data => {
+        //     console.log(data);
+        // })
+
+
+
+        function* createIterator() {
+            yield 1;
+            yield 2;
+            yield 3;
+        }
+        const a = createIterator(); //a是一个迭代器
+        console.log(a);
+        const s = a[Symbol.iterator]();//使用Symbol.iterator访问迭代器
+        console.log(s.next()) //{value: 1, done: false}
+
+
+        // 执行顺序:先执行宏任务 在执行微任务  (微任务 generation promise) (宏任务: 定时器 延时器)
+    </script>
+</body>
+
+</html>

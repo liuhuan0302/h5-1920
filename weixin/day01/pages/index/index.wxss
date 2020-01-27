@@ -1,0 +1,29 @@
+/**index.wxss**/
+.wrapper{
+  display: flex
+}
+.wrapper view{
+  height:100px;
+  width:100px;
+}
+.wrapper view:nth-child(1){
+  background:Red;
+}
+.wrapper view:nth-child(2){
+  background:green;
+}
+.wrapper view:nth-child(3){
+  background:yellow;
+}
+swiper{
+  height: 200px;
+}
+swiper swiper-item:nth-child(1){
+  background: red;
+}
+swiper swiper-item:nth-child(2){
+  background: green;
+}
+swiper swiper-item:nth-child(3){
+  background: pink;
+}

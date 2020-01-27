@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // //全局上下文
+    //     console.log(this);// window
+    //     'use strict'//严格模式
+    //     console.log(this); //window
+
+    // //函数上下文
+
+    //     // 非严格模式
+    //     var doSth = function(){
+    //         console.log(this);//window
+    //     }
+    //     doSth(); // 'window'
+
+    //     let name2 = 'xiao';
+    //     let doSth2 = function(){
+    //         console.log(this === window);
+    //         console.log(this.name2);
+    //     }
+    //     doSth2() // true, undefined
+
+
+        var name = 'window';
+        var doSth = function(){
+            console.log(this.name);
+        }
+        var student = {
+            name: '轩辕Rowboat',
+            doSth: doSth,
+            other: {
+                name: 'other',
+                doSth: doSth,
+            }
+        }
+        student.doSth(); // '轩辕Rowboat'
+        student.other.doSth(); // 'other'
+        // 用call类比则为：
+        student.doSth.call(student);
+        // 用call类比则为：
+        student.other.doSth.call(student);
+
+    /*
+    this指向:
+    1.全局调用 函数名 this=>window
+    2.对象调用 对象,函数名 this => 点前面是谁指向谁
+    3.定时器处理函数 this=>window
+    4.事件处理函数 this=>事件源(谁身上的事件)
+    5.自执行函数 this=>widow
+
+    强行改变this指向:
+    call()
+        语法:函数名.call(要改变的this指向,第二个参数:传的值)
+        第一个参数如果不写或者写null,表示window
+        a
+    
+    */ 
+    </script>
+</body>
+</html>

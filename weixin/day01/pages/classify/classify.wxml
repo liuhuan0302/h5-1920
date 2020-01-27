@@ -1,0 +1,30 @@
+<!--pages/classify/classify.wxml-->
+<view>
+classify
+{{message}}
+{{mark == 3 ? 3:0}}
+<ul>
+<li wx:for="{{arr}}">
+{{item}}-{{index}}
+</li>
+
+<text wx:if="{{mark==1}}">我是真</text>
+<text wx:elif="{{mark == 2}}">我是也真</text>
+<text wx:else>我是假</text>
+
+</ul>
+<button open-type="share" size="mini" >点我分享</button>
+<button type="primary" bindtap="jumpTypeOf">点我跳转</button>
+<view>123</view>
+<view>123</view>
+<view>123</view>
+<view>123</view>
+<view>123</view>
+<view>123</view>
+<view>123</view>
+<view>123</view>
+<view>123</view>
+<view>123</view>
+<view>123</view>
+<view>123</view>
+</view>

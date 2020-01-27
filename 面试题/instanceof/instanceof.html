@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //instanceof 的原理
+    //instanceof 可以正确的判断对象的类型，因为内部机制是通过判断对象的原型链中是不是能找到类型的 prototype。
+    function myInstanceof(left,right){
+        console.log(left)
+        let prototype = right.prototype
+        console.log(prototype)
+        left = left.__proto__
+        console.log(left)
+        while(true){
+            if(left === null || left === undefined || left !== prototype){
+                return false
+            }
+            if(prototype === left){
+                return true
+                left = left.__proto__
+            }
+        }
+    }
+    var arr = {}
+    console.log (myInstanceof(arr,Array))
+    // console.log( arr myInstanceof Array)
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{message}}{{1 + 1}}
+        <ul>
+            <li v-for="(item,index) in attr">{{index}}---{{item}}</li>
+        </ul>
+    </div>
+    
+    
+    <script src="./vue.js"></script>
+    <script>
+        //配置vue
+       let app = new Vue({
+            el : "#app",//解析vue语法的元素(在哪解析vue语法)
+            data : {//数据
+                message : "hello world",
+                attr :["海贼王","哈哈哈","进击的vue"]
+            }
+        })
+        app.attr.push("中华小当家")
+        setTimeout(_=>{
+            app.message = "哈哈哈";
+        },2000)
+        //{{message}}解析数据 查找表达式:在vue内可以解析任意数据,可以解析表达式
+        //mvvm m 是指数据data  v 是views 视图层  vm 是vue 配置项,连接数据和视图层 
+        //响应式:vue的核心原理 vue的所有属性挂载到vue 实例下,可以直接通过app.message 进行查找,同时只有数据发生变化,就在那发生了变化
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div id="computed">
+      <ul>
+          <li v-for="items in people">
+              <p v-for="item in items">{{item}}</p>
+          </li>
+      </ul>
+      <p>所有人年龄的总和:{{getUserAge()}}</p>
+      <p>所有人年龄的总和:{{getUserAge()}}</p>
+      <p>所有人年龄的总和:{{getUserAge()}}</p>
+
+
+      <p>所有人年龄的总和:{{userAge}}</p>
+      <p>所有人年龄的总和:{{userAge}}</p>
+      <p>所有人年龄的总和:{{userAge}}</p>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el: "#computed",
+            data: {
+                people: [{
+                    name: "郝宏麟",
+                    sex: "男",
+                    height: "180cm",
+                    weight: "135",
+                    age: 18
+                }, {
+                    name: "雒继萍",
+                    sex: "女",
+                    height: "180cm",
+                    weight: "135",
+                    age: 19
+                }, {
+                    name: "赵前",
+                    sex: "男",
+                    height: "180cm",
+                    weight: "135",
+                    age: 28
+                }, {
+                    name: "蔺学珍",
+                    sex: "男",
+                    height: "180cm",
+                    weight: "135",
+                    age: 19
+                }, {
+                    name: "李旺",
+                    sex: "男",
+                    height: "180cm",
+                    weight: "135",
+                    age: 38
+                }]
+            },
+            methods: {
+                getUserAge(){
+                    let countAge = 0;
+                    for(let items of this.people){
+                        console.log(items.age)
+                        countAge += items.age;
+                    }
+                    console.log( countAge)
+                    
+                    return countAge;
+                }
+            },
+            computed: {//计算属性(有缓存,只需要计算一次)
+                userAge(){
+                    let countAge = 0;
+                    for(let items of this.people){
+                        console.log(items.age)
+                        countAge += items.age;
+                    }
+                    console.log( countAge)
+                    return countAge;
+                }
+            }
+        })
+/*
+
+wathc computed和methods 之间的对比
+    1.computed属性的结果会被缓存.除非依赖的响应式属性变化才会重新计算.主要当中属性来使用
+    2.methods 方法表示一个具体的操作,主要书写业务逻辑
+    3.watch 一个对象.键是需要观察的表达式,值是对应回调函数.主要用来监听某些特定数据的变化.从而进行某些具体的业逻辑操作;可以看作是computed 和 methods的结合体
+*/
+    </script>
+</body>
+
+</html>

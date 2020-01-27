@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // function CreateTag(){
+    //     if(!CreateTag.instance){
+    //         CreateTag.instance = {
+    //             init(){
+    //                 this.event()
+    //             },
+    //             create(){
+    //                 var newTag = document.createElement("div");
+    //                 document.body.appendChild(newTag);
+    //             },
+    //             event(){
+    //                 document.addEventListener('click',this.create.bind(this))
+    //             }
+    //         }
+    //     }
+    //     return CreateTag.instance;
+    // }
+
+    //单例模式
+    // function CreateTag(){
+    //     if(!CreateTag.instance){
+    //        CreateTag.instance = {
+    //            init(){
+    //                this.event()
+    //            },
+    //            create(){
+    //                var newTag = document.createElement('div');
+    //                document.body.appendChild(newTag)
+    //            },
+    //            event(){
+    //                document.addEventListener("click",this.create.bind(this))
+    //            }
+    //        }
+    //     }
+    // }
+
+    function CreateTag(){
+        if(!CreateTag.instance){
+            CreateTag.instance = {
+                init(){
+                    this.event()
+                },
+                create(){
+                    var newTag = document.createElement('div');
+                    document.body.appendChild(newTag)
+                },
+                event(){
+                    document.addEventListener('click',this.bind(this))
+                }
+            }
+        }
+        return CreateTag.instance
+    }
+    function CreateTag(){
+        if(!CreateTag.instance){
+            CreateTag.init = {
+                init(){
+                    this.event()
+                },
+                create(){
+                    var newTag = document.createElement("div")
+                    document.body.appendChild(newTag)
+                },
+                event(){
+                    document.addEventListener("click",this.bind(this))
+                }
+            }
+        }
+        return CreateTag.instance
+    }
+
+    var createDiv = (function(){
+        var createDiv;
+        return function(){
+            if(!createDiv){
+                createDiv = document.createElement("div")
+            }
+            return createDiv
+        }
+    })()
+
+  
+    </script>
+</body>
+</html>

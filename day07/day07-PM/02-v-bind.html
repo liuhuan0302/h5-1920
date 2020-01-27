@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width:100px;
+            height:100px;
+            background:red;
+        }
+        .wrap2{
+            width:200px;
+            height:200px;
+            background:green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <!-- <div v-bind:class="{wrap:false,wrap2:true}"></div> -->
+        <div v-bind:class="{wrap:onOff,wrap2:!onOff}"></div>
+        <div v-bind:class="[wrap,wrap2]"></div>
+        <div v-bind:style="{width:wid,height:'200px',background:'yellow'}"></div>
+        <div :style="{width:wid,height:'200px',background:'pink'}"></div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    
+    new Vue({
+        el : "#app",
+        data :{
+            message : '哈哈哈哈',
+            onOff : true,
+            wrap:"wrap",
+            wrap2:"wrap2", 
+            wid:'300px'
+        }
+    })
+
+    /*
+    v-bind: 让原生属性支持vue语法
+            绑定成支持vue解析的属性
+            可以动态修改原生的属性
+    v-bind:的语法糖 :
+    
+
+     v-bind:style="{width:'200px',height:'200px',background:'yellow'}"
+     注意:加引号和逗号
+    
+    */ 
+    </script>
+</body>
+</html>

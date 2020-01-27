@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../../../第二阶段/大麦网/src/js/lib/jquery-1.11.3.min.js"></script>
+    <script>
+    //深拷贝第一种:递归
+    // function deepClone(obj){
+    //     let objClone = Array.isArray(obj)?[]:{};
+    //     for(key in obj){
+    //         if(obj.hasOwnProperty(key)){
+    //             //判断obj的子元素是否为对象,如果是,递归复制
+    //             if(obj[key]&&typeof obj[key] ==="object"){
+    //                 objClone[key] = deepClone(obj[key]);
+
+    //             }else{
+    //                 //如果不是,简单复制
+    //                 objClone[key] = obj[key];
+    //             }
+    //         }
+    //     }
+    //     return objClone;
+    // } 
+    
+    // let a = [1,2,3,4]
+    //     b=deepClone(a);
+    //     a[0]=2;
+    //     console.log(a,b)
+
+    //第二种
+    // function deepClone(obj){
+    //     let objClone = JSON.parse(JSON.stringify(obj));
+    //     return objClone;
+    // }
+    // let a=[0,1,[2,3],4],
+    //     b=deepClone(a);
+    //     a[0]=1;
+    //     a[2][0]=1;
+    //     console.log(a,b)
+
+    //第三种:extend
+    let a = [0,1,[2,3],4];
+    b = $.extend(true,[],a);
+    a[0]=1;
+    a[2][0]=1;
+    console.log(a,b);
+    </script>
+</body>
+</html>
+
+<!-- 
+$.extend( [deep ], target, object1 [, objectN ] )
+deep表示是否深拷贝，为true为深拷贝，为false，则为浅拷贝
+target 为Object类型 目标对象，其他对象的成员属性将被附加到该对象上。
+object1 objectN可选。 Object类型 第一个以及第N个被合并的对象
+
+作者：面朝南的落地窗
+链接：https://www.jianshu.com/p/55d3e1b3afab
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+ -->

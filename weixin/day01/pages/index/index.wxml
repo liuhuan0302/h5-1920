@@ -1,0 +1,50 @@
+<!--index.wxml-->
+<view class="wrapper">
+<view>1</view>
+<view>1</view>
+<view>1</view>
+
+</view>
+
+<map
+longitude="116.250107"
+latitude="40.116177"
+></map>
+<icon 
+  type="success"
+  size="30"
+  color="red"
+  ></icon>
+<picker mode="date"> 
+  <view>123</view>
+</picker>
+<swiper 
+indicator-dots="true" 
+indicator-color="blue" 
+indicator-active-color="#fff"
+autoplay="true"
+current="2"
+interval="2000"
+duration="500"
+circular="true"
+>
+    <swiper-item>123</swiper-item>
+    <swiper-item>234</swiper-item>
+    <swiper-item>567</swiper-item>
+</swiper>
+
+<progress
+  percent="60" 
+  show-info="true"
+  font-size="20"
+  stroke-width="10"
+  color="red"
+  activeColor="green"
+  backgroundColor="yellow"
+  active="true"
+  border-radius="4"
+  ></progress>
+
+<textarea placeholder="哈哈" maxlength="10" auto-focus="true" focus="true" auto-focus="true"></textarea>
+<input></input>
+<button  type="primary" bindtap="jumpToClassify" >12312</button>

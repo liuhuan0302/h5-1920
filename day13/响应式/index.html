@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <div id="root">
+       <input type="text" v-model="test">{{test}}
+   </div>
+    <script src="./test.js"></script>
+    <script>
+
+class MVVM{
+        constructor(opts){
+            this.el = opts.el;//绑定的根元素
+            this.data = opts.data();//注意data 是一个函数,需要传入一个对象
+            this.init();
+        }
+        //初始化函数
+        init(){
+            //响应式方法(监听当前所有数据的变化(data))
+            this.observe(this.data);
+            //查找当前所有绑定数据元素的所有子节点 
+            this.compilerElement(this.el)
+        }
+        //实现数据和视图的绑定 
+        compilerElement(node){
+            //获取父元素
+            const root = document.querySelector(node);
+            //获取父元素下面的所有子节点(包括文本节点)
+            const child = root.childNodes;
+            //类数组转成取值 1.[...child] 2.for 循环 3 .Array.from
+            Array.from(child).forEach(node=>{
+                //对当前所有节点进行循环遍历 判断:如果子节点下面还有子节点,重新调用方法
+                //console.log(node)所有的子节点
+                if(node.childNodes && node.childNodes.length){
+                    //如果还有子节点,需要进行递归,在循环一遍
+                    this.compilerElement(node);
+                }else{
+                    //如果没有子节点,则调用compiler方法
+                    this.compiler(node);
+                }
+            })
+        }
+        compiler(node){
+            //node 既包括文本节点也包括元素节点,需要对节点类型进行判断(文本节点直接更改值,元素节点需要找到对应的属性(v-model))
+            if(node.nodeType == 3){
+                //文本节点
+                //找到文本节点中的文本内容
+                const text = node.textContent;
+                //正则表达式,判断当前取到的值是否是{{}}形式的
+                const reg = /\{\{(.*)\}\}/;
+                if(reg.test(text)){
+                    //如果匹配成功(取出正则匹配成功的第一个子项)(text)
+                    const key = RegExp.$1;
+                    //console.log(key); text
+                    //拿到需要子项
+                    //将data里面的数据响应到html中
+                    node.textContent = this.data[key];
+                    //console.log(node);//文本节点
+                    //当数据响应到页面上之后,要对该数据进行观察,并添加到观察者队列中
+                    //观察者 参数1:当前的数据 参数2:观察的属性(key)(当前文本中的值) 参数3: 回调修改之后的值(实时修改的值)
+                    new Watcher(this.data,key,val=>{
+                        console.log("a")
+                        node.textContent = val;
+                        //console.log(val)
+                    })
+                }
+            }else if(node.nodeType == 1){
+                //获取元素节点的属性(test)
+                const attrs = node.attributes;
+                Array.from(attrs).forEach(attr=>{
+                    //console.log(attr.nodeName);
+                    if(attr.nodeName == "v-model"){
+                        //将data里面的test数据给到绑定的元素
+                        node.value = this.data[attr.nodeValue];
+                        //console.log(attr.nodeValue) //test
+                        //对input 输入框进行监听
+                        addEventListener("input",_=>{
+                            //console.log(node.value)
+                            //将input 新输入的值赋给data里面的相对应的属性(attr.nodeValue == key)(即v-model="test" 是指test)
+                            this.data[attr.nodeValue] = node.value;
+                        })
+                        //观察者 参数1:当前的数据(对象) 参数2:观察的属性(key) 参数3: 修改之后的值
+                        new Watcher(this.data,attr.nodeValue,val=>{
+                            console.log("b")
+                            //console.log(attr.nodeValue)
+                            //val为修改之后的值
+                            node.value = val;
+                        })
+                    }
+                })
+
+            }
+        }
+        //响应式,对当前所有的数据进行监听(obj == this.data)  
+        observe(obj){
+            //console.log(obj)
+            //判断当前传入数据是否是一个对象
+            if(typeof obj !== "object"){
+                //如果不是一个对象,就return ,不符合规范
+                return;
+            }
+            //console.log(Object.keys(obj))取出的值 ["test", "test2", "test3"]
+            //如果传入的数据是一个对象,怎可以对数据进行监控objext.defineProperty
+            //对传入的所有数据进行监控(需要对数据进行循环遍历)
+           // ES5 引入了Object.keys方法，成员是参数对象自身的（不含继承的）所有可遍历（ enumerable ）属性的键名。
+           //将传入的对象中所有属性进行循环遍历
+           Object.keys(obj).forEach(key=>{
+               //key 是对象的所有属性,对所有属性进行监听(只能监听属性)
+              console.log(key)
+               this.defineReactive(obj,key,obj[key]);
+           })
+        }
+        //参数1:监听的对象 参数2:当前对象的属性 参数3:属性值
+        defineReactive(obj,key,value){
+            // console.log(1)
+            //对value(属性值) 进行递归,对obj在循环遍历(defineProperty 监测不了对象,只能监听属性)
+            // this.observe(value);
+            //实例化dep 观察者队列
+            let dep = new Dep();
+            //响应式 参数1: 监听的对象 参数2:监听的属性
+            //实现响应式的关键操作
+            Object.defineProperty(obj,key,{
+                get(){
+                    //console.log(key)
+                    console.log("我被获取啦" + value)
+                    //当数据被获取了
+                    //当target 存在,说明watcher 被执行啦
+                    // console.log(Target)
+                    Target && dep.add(Target)
+                    //获取之后,直接返回获取的值
+                    return value;
+                },
+                //修改data里面的数据
+                set(newVal){
+                    //console.log(newVal)
+                    console.log("我被修改啦" + newVal)
+                    value = newVal
+                   //当数据发生修改啦
+                   dep.notify();
+                }
+            })
+        }
+    }
+    let uId = 1;//用来记录观察者
+    let Target = null;
+    //观察者模式
+    class Watcher{
+        //参数1:传入的数据 参数2:对应的参数 参数3:回调(传入的值)
+        constructor(data,key,cb){
+            this.data = data;
+            this.key = key ;
+            this.cb = cb;
+            //console.log(this.cb)
+            this.uId = uId;//防止观察者重复添加到队列(dep )
+            uId++, //每一次进来之后都会进行一次赋值
+            Target = this;//Target 指向的是watcher
+            this.value = this.data[key];//触发了get,对data中的数据进行啦获取(key是当前页面中需要填充数据的test)
+            Target = null; //获取了数据之后,watcher 为null,相当于移除观察者,防止观察者的重复
+            
+        }
+        //对
+        update(){
+            //获取当前传入的值
+            let value = this.data[this.key];
+            // console.log(this)
+            // console.log(this.data[this.key])//新传入的值
+            // console.log(this.value);//上一个值
+            //如果当前传入的value 不等于 获取的data里面的value值
+            //判断传入的值,是否在data里面存在,如果没有存在
+            if(value != this.value){
+                //将input 中输入的值 赋给data 里面的值
+                this.cb.call(this.data,value)
+            }
+        }
+    }
+    //观察者队列
+    class Dep{
+        constructor(){
+            this.subs = [];
+        }
+        add(watcher){
+            let _mark = true;
+            //对观察者队列进行循环遍历
+            this.subs.forEach(sub=>{
+                //判断传入的观察者是否在观察者队列里面存在
+                if(sub.uId == watcher.uId){
+                    //如果观察者队列存在此观察者,则跳出
+                    _mark = false;
+                    return;
+                }
+            })
+            //如果_mark为true,则将观察者添加到观察者队列里面
+            if(_mark){
+                this.subs.push(watcher);
+            }
+        }
+        //让观察者队列里面的所有观察者进行更新
+        notify(){
+            this.subs.forEach(sub=>{
+                sub.update();
+            })
+        }
+    }
+    const app = new MVVM({
+        el:"#root",
+        data(){
+            return {
+                test:123,
+                test2:{
+                    a:1
+                },
+                test3:333
+            }
+        }
+    })
+
+   
+    </script>
+</body>
+</html>
+
+<!-- 
+    view --- complier --- model
+    complier 是用来沟通数据和视图的,去视图里面查找拿使用到了data里面的数据变量
+    响应式的实现,关联数据的变化,数据发生变化,视图也会发生变化(observer)(监听数据的变化)
+
+    第一步:实现响应式(监听data里面所有数据的变化)(observer)(Object.defineProperty )
+        + 判断当前传过来的数据是否是一个对象
+            - 如果是对象,对data进行循环遍历,取出属性,进行数据劫持
+        + 利用 defineRective (Object.defineProperty js原生的) 监听所有的data数据(利用object.key(obj)取出当前对象中所有属性)
+            - 由于Object.defineProperty 不能监听属性,需要利用递归的形式,取到data里面的所以属性
+            - get 获取之后返回获取的值
+            - set 修改之后,返回修改之后的值 value = newValue
+    第二步:视图和数据的绑定(会触发get函数)(compiler)
+        + compilerElement(取到当前的所有子节点)
+            - 获取根节点 root
+            - 获取根节点下面的所有子节点(包括文本节点)(childNodes)
+        + compiler 
+            - 文本节点{{test}}
+                - 对文本节点进行判断({{}})
+                - 将data中的值赋给文本节点 node.textContent
+                - 绑定watcher,数据发生变化,则把新值给data
+            - 元素节点 v-model
+                - node.value = this.data[attr.nodeName]
+                - 监听input中值的变化
+                - 绑定watcher,数据发生变化,则把新值给data
+            
+
+    第三步:观察者Watcher
+        + 保存wather的属性 constructor
+        + update 当前属性的更新
+            - 将新传入的值,赋给value
+
+    只要数据被获取了就要对观察者队列做添加
+
+ -->

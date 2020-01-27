@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/auto.css">
+</head>
+
+<body>
+    <section>
+        <div>
+            <%=username%>先生/女士,你好:
+        </div>
+        <form action="/files" method="post" enctype="multipart/form-data" target="no-jump">
+            <div>
+                <label for="">商品名:</label>
+                <input type="text" name="shopname" placeholder="请输入商品名称" />
+            </div>
+            <div>
+                <label for="">价格:</label>
+                <input type="text" name="price" placeholder="请输入商品价格" />
+            </div>
+            <div>
+                <label for="">描述:</label>
+                <input type="text" name="description" placeholder="请输入商品描述" />
+            </div>
+            <div>
+                <label for="">选择上传的图片:</label>
+                <input type="file" name="file" />
+            </div>
+            <input type="submit" value="提交">
+        </form>
+        <a href="/showShop">商品列表</a>
+
+        <iframe name="no-jump" style="display:none"></iframe>
+    </section>
+
+</body>
+
+</html>
+
+<!-- 
+    enctype="multipart/form-data" 文件传输
+    target="no-jump" target form表单的属性,规定form 表单往哪里跳转
+ -->

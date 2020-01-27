@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="todo">
+        <input type="text" @keyup.enter="pushData" placeholder="请输入内容....">
+        <ul>
+            <li v-for="item in todoArr">
+                <span>{{item}}</span>
+                <button @click="remove(index)">删除</button>
+            </li>
+        </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el:"#todo",
+        data:{
+            todoArr:[]
+        },
+        methods:{
+            pushData(e){
+                console.log()
+                //把空格替换为空
+                let reg=/\s/g
+                if(e.target.value.replace(reg,'') != ''){
+                    this.todoArr.push(e.target.value);
+                    
+                }
+                //清空输入框
+                e.target.value = "";
+            },
+            remove(i){
+                this.todoArr.splice(i,1);
+            }
+        }
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var arr =[10,7,8,8,9,30,20,1,10];
+    //sort 排序
+    arr.sort(function(val1,val2){
+        return val1 - val2;
+    })
+    console.log(arr);
+    
+    //冒泡排序(相邻的进行比较)
+    function bubbleSort(arr){
+        //确定比较的轮数(数组长度 - 1)
+        for(var i = 0; i < arr.length-1; i++){
+            //确定每一轮需要比较的次数(数组长度 - 轮数 - 1)(每一轮就能确定一个最大数,少比较一次)
+            for(var k = 0; k < arr.length - i - 1; k++){
+                //比较相邻两个数的大小
+                if(arr[k] > arr[k+1]){
+                    var tmp = arr[k];
+                    arr[k] = arr[k+1];
+                    arr[k+1] = tmp;
+                }
+            }
+        }
+        return arr;
+    }
+    
+    //选择排序(第一个数依次跟后面的数进行比较)
+    function chooseSort(arr){
+        //确定比较的轮数
+        for(var i = 0; i < arr.length-1; i++){
+            //确定每一轮比较的次数
+            for(var k = i + 1; k < arr.length;k++){
+                if(arr[i] > arr[k]){
+                    var tmp = arr[i];
+                        arr[i] = arr[k];
+                        arr[k] = tmp;
+                }
+            }
+        }
+        return arr;
+    }
+
+    //快速排序(取中间值进行比较)
+    function quickSort(arr){
+        //判断数据长度
+        if(arr.length <= 1){
+            return arr;
+        }
+        let 
+            middleIndex = parseInt(arr.length / 2),
+            midVul = arr[middleIndex],
+            leftArr = [],
+            rightArr = [];
+        for(let i = 0; i < arr.length; i++ ){
+            //中间值不和自身做比较
+            if(i == middleIndex){
+                continue;
+            }
+            if(arr[i] <= midVul){
+                leftArr.push(arr[i]);
+            }else{
+                rightArr.push(arr[i])
+            }
+        }
+        let newArr = quickSort(leftArr).concat(midVul).concat(quickSort(rightArr));
+        return newArr;
+    }
+
+    //console.log(quickSort(arr));
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='num'>
+        <p>{{num}}</p>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            num : 0
+        }
+    })
+    /*
+    mvvm 的语法糖
+    v-model:控制数据的双向流通
+    DOM Listeners 元素监听数据的变化
+    Data Bindings model绑定数据引发dom 的变化
+    */ 
+    </script>
+</body>
+</html>

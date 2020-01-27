@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+
+    </div>
+    <button id="button">点我替换</button>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-class.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-style.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-props.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-eventlisteners.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/h.js"></script>
+    <script>
+
+    /*
+    h(sel,data,children)
+        它的第一个参数是元素的选择器，这里可以参考jq的写法，#和.分别代表了id和class,对于多个class，可以div#divId.red.blue.black这样去写；
+        它的第二个参数是模块数据的定义，没有可以省略;
+        它的第三个参数是其子节点的形式;
+    
+    
+    */
+        //初始化snabdom
+        const patch = snabbdom.init([
+            snabbdom_class,
+            snabbdom_style,
+            snabbdom_props,
+            snabbdom_eventlisteners
+        ])
+        const h = snabbdom.h
+
+        var data = [
+            {
+                title:"哈哈",
+                num:1
+            },
+            {
+                title:"嘿嘿",
+                num:2
+            },
+            {
+                title:"呵呵",
+                num : 5
+            }
+        ]
+        
+        //渲染
+        var vnode//老节点
+        function render(data){
+            //创建虚拟dom
+            var children = data.map(item=>{
+               return  h("li",{},[
+                    h("span",{},[item.title + ""]),
+                    h("span",{},[item.num])
+                ])         
+            })
+            //创建虚拟dom节点(参数1:标签 参数2:属性 参数3:子节点)
+           const newVnode =h("ul",{},children)
+           if(!vnode){
+                 //第一次patch 将新节点挂载到main下面
+                patch(main,newVnode)
+           }else{
+               patch(vnode,newVnode)
+           }
+           //渲染之后,件newvnode赋给vnode
+           vnode = newVnode
+        }
+        render(data)
+        //点击替换(替换其中的内容)(会重新渲染所有的节点)
+        button.onclick = function(){
+            data[0].title = "哦哦";
+            data[1].num = 666
+            render(data)
+        }
+
+        //虚拟dom的映射成真实节点
+        function createElement(data){
+            var tag = data.tag;
+            var attrs = data.attrs;
+            var children = data.children || []
+            //创建真实节点
+            var ele = document.createElement(tag);
+            if(!tag){
+                return //递归的出口
+            }
+            //添加属性
+            for(var attr in attrs){
+                //只能添加自身的属性,而不是原型链上的hasOwnProPerty
+                if(attrs.hasOwnProPerty(attr)){
+                    ele.setAttribute(attr,attrs[attr])
+                }
+               
+            }
+            //添加自己节点(要做判断是否还有子节点)
+            children.foreach(item=>{
+                if(item.children.length){
+                    //如果有子节点(进行递归)
+                    createElement(item)
+                }else{
+                    //没有则直接添加并 映射成真实的dom节点 
+                    ele.appendChild(document.createElement(item.tag))
+                }
+                
+            })
+            return ele
+        }
+        // console.log(snabbdom,h)
+        // //h函数创建虚拟dom;参数1:标签 参数2:属性 参数3:子节点[]
+        // const vnode = h("div",{},["哈哈"])
+        // //patch方法一个有三个(第一个,插入虚拟dom节点)(第二个比较新老节点)
+        // patch(main,vnode)
+    //虚拟dom重要的是h函数和patch 函数
+
+
+
+    /*
+         虚拟dom结构 (patch 逐行比较)  
+            
+                {
+                    tag : "ul",
+                    attrs : {},
+                    children : [
+                        {
+                            tag : "li",
+                            attrs : {},
+                            children : [{
+                                tag : "span",
+                                attrs : {},
+                                children : [哈哈]
+                            },
+                            {
+                                tag : "span",
+                                attrs : {},
+                                children : [1]
+                            }]
+                        },
+                        {
+                            tag : "li",
+                            attrs : {},
+                            children : [{
+                                tag : "span",
+                                attrs : {},
+                                children : [嘿嘿]
+                            },
+                            {
+                                tag : "span",
+                                attrs : {},
+                                children : [2]
+                            }]
+                        },
+                        {
+                            tag : "li",
+                            attrs : {},
+                            children : [{
+                                tag : "span",
+                                attrs : {},
+                                children : [呸呸]
+                            },
+                            {
+                                tag : "span",
+                                attrs : {},
+                                children : [5]
+                            }]
+                        }
+                    ]
+                }
+            
+            
+            
+            
+            */
+    </script>
+</body>
+</html>

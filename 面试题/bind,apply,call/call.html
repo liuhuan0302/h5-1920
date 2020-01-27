@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            a:1
+        }
+        //call的实现原理(call内部返回了一个方法)
+        Function.prototype.myCall = function(ctx){
+            console.log(this);//谁调用则this 指向谁(此时指向的是b函数,并在内部对函数进行了执行)
+            //ctx指的是上下文(即this指向)
+            var ctx = ctx || window;
+            //console.log(ctx)(obj)
+            //ctx 有一个fn的方法
+            ctx.fn = this;//this指向Function
+            console.log(ctx)
+            // console.log(arguments)
+            //获取call 传入的参数 
+            var args = [...arguments].slice(1)
+            console.log(args)
+            //将参数传入ctx.fn并执行该函数
+            var res = ctx.fn(...args)
+            //避免多次调用call,造成内存泄露
+            delete ctx.fn
+            return res
+        }
+
+        function b(a,b,c){
+            //如果不改变this执行,this 指向的是window
+            console.log(this.a,a,b,c)
+        }
+        //将b的this指向 obj
+        //b.call(obj,1,2,3)
+        b.myCall(obj,1,2,3)
+    </script>
+</body>
+</html>

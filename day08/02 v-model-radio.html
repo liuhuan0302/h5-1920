@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <input type="radio" name="sex" value="男" id="man"><label for="man">男</label>
+        <input type="radio" name="sex" value="女" id="woman"><label for="woman">女</label> -->
+
+        <input type="radio" v-model="sex" value="男1" id="man"><label for="man">男</label>
+        <input type="radio" v-model="sex" value="女1" id="woman"><label for="woman">女</label>
+        <p>{{sex}}</p>
+       
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            sex:''//根据双向数据绑定原则,虽然sex没有赋值,但是在切换是,会把单选框的value值赋给sex
+        }
+    })
+    </script>
+</body>
+</html>

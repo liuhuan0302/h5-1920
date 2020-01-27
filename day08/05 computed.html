@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="computer">
+        {{lastName +" "+ firstName + " | " + sex}}
+        <p>{{setUserName()}}</p>
+        <p>{{setUserName()}}</p>
+        <p>{{setUserName()}}</p>
+        <p>{{setUserName()}}</p>
+        <p>{{setUserName()}}</p>
+        <p>{{setUserName()}}</p>
+
+
+
+        <p>{{userName}}</p>
+        <p>{{userName}}</p>
+        <p>{{userName}}</p>
+        <p>{{userName}}</p>
+        <p>{{userName}}</p>
+        <p>{{userName}}</p>
+
+        <input type="text" v-model.lazy="userName">
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    new Vue({
+        el:"#computer",
+        data:{
+            firstName :"李",
+            lastName:'小明',
+            sex:'男'
+        },
+        methods:{
+            setUserName(){
+                console.log('methods')
+                return this.lastName +" "+ this.firstName + " | " + this.sex
+            }
+        },
+        computed:{//计算属性
+            //属性
+            userName(){
+                console.log('computed')
+                return this.lastName +" "+ this.firstName + " | " + this.sex
+            },
+            //计算属性的getter setter
+            // userName:{
+            //     get(){
+            //         return this.lastName +" "+ this.firstName + " | " + this.sex
+            //     },
+                //修改属性
+                // set(val){
+                //     console.log(val);//val指输的内容
+                //     let arr = val.split(" ");
+                //     this.lastName =arr[0];
+                //     this.firstName =arr[1];
+                //     this.sex =arr[2];
+                // }
+            // }
+        }
+    })
+    //computed 是有缓存的只执行一次
+    </script>
+</body>
+</html>
